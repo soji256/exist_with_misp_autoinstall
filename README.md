@@ -1,4 +1,4 @@
-# EXIST with MISP Auto Installer
+# EXIST with MISP Auto-Installer
 
 This script automatically installs the cyber threat information aggregation system EXIST.
 
