@@ -14,6 +14,9 @@ sed -i -e "s/rh-php56/rh-php72/g" misp.variables.sh
 sed -i -e "s/rh-php56/rh-php72/g" misp.install.sh
 sed -i -e "s/yum install python-importlib/##yum install python-importlib/g" misp.install.sh
 
+# Change the timezone (Europe/London -> Asia/Tokyo)
+sed -i -e "s/Europe/London/Asia/Tokyo/g" misp.install.sh
+
 # Set the DB Charset
 CHANGE_DB_CHARSET_TO_UTF8='sed -i -e "$(grep \\\\[mysqld\\\\] -n /etc/my.cnf.d/server.cnf | cut -d : -f 1)a character-set-server=utf8" /etc/my.cnf.d/server.cnf'
 sed -i -e "$(grep 'systemctl enable mariadb.service' -n misp.install.sh | cut -d : -f 1)i $CHANGE_DB_CHARSET_TO_UTF8" misp.install.sh
@@ -140,6 +143,11 @@ sed -i -e "s/{{ tw.datetime }}/\<a href=\"https:\/\/twitter.com\/{{ tw.screen_na
 sed -i -e "s/{{ tw.datetime }}/\<a href=\"https:\/\/twitter.com\/{{ tw.screen_name }}\/status\/{{ tw.id }}\"\>{{ tw.datetime }}\<\/a\>/g" apps/dashboard/templates/dashboard/index.html
 sed -i -e "s/{{ tw.datetime }}/\<a href=\"https:\/\/twitter.com\/{{ tw.screen_name }}\/status\/{{ tw.id }}\"\>{{ tw.datetime }}\<\/a\>/g" apps/twitter_hunter/templates/twitter_hunter/tweets.html
 
+# Web Site Screenshot
+yum install wkhtmltopdf xorg-x11-server-Xvfb -y
+cp scripts/url/url.conf.template scripts/url/url.conf
+sed -i -e "s/path\/to\/your\/exist/opt\/exist/g" scripts/url/url.conf
+
 ## EXIST Service
 cat <<EOL >> /etc/systemd/system/exist.service
 [Unit]
@@ -159,6 +167,7 @@ EOL
 
 systemctl start exist.service
 systemctl enable exist.service
+
 
 echo "Admin (root) DB Password: ${DBPASSWORD_ADMIN}"
 echo "User  (misp) DB Password: ${DBPASSWORD_MISP}"
