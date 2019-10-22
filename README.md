@@ -1,6 +1,7 @@
 # EXIST with MISP Auto-Installer
 
-This script automatically installs the cyber threat information aggregation system EXIST.
+This script automatically installs the cyber threat information aggregation system EXIST.  
+This tool uses [misp-install-centos -7](https://github.com/vodkappa/misp-install-centos-7) to install MISP.
 
 ## System Requirements
 
