@@ -12,9 +12,17 @@ This tool uses [misp-install-centos -7](https://github.com/vodkappa/misp-install
 sudo su -
 
 wget https://raw.githubusercontent.com/soji256/exist_with_misp_autoinstall/master/exist_with_misp_install.sh
-chmod 755 exist_with_misp_install.sh
 
+chmod 755 exist_with_misp_install.sh
 ./exist_with_misp_install.sh
+
+wget https://raw.githubusercontent.com/soji256/exist_with_misp_autoinstall/master/exist_with_misp_configuration.sh
+
+## Set Your API keys
+vim exist_with_misp_configuration.sh
+
+chmod 755 exist_with_misp_configuration.sh
+./exist_with_misp_configuration.sh
 ```
 
 ## EXIST
