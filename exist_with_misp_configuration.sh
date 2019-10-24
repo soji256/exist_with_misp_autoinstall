@@ -131,5 +131,6 @@ cd /opt/exist/
 wget http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.mmdb.gz
 gzip -d GeoLite2-City.mmdb.gz
 cp conf/geoip.conf.template conf/geoip.conf
-sed -i -e "s/path\/to\/your\/exist/opt\/exist/g" conf/geoip.conf
+sed -i -e "s/path\/to\/your/opt\/exist/g" conf/geoip.conf
+
 
