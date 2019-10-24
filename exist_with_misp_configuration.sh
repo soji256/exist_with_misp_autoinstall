@@ -93,6 +93,8 @@ MAILTO = ''
 LANG=ja_JP.UTF-8
 
 # EXIST
+*/1 * * * * cd /opt/exist/; source venv-exist/bin/activate; bash -l -c 'python3 scripts/hunter/twitter/tw_watchhunter.py'
+*/1 * * * * cd /opt/exist/; source venv-exist/bin/activate; bash -l -c 'python3 scripts/hunter/threat/th_watchhunter.py'
 */20 * * * * cd /opt/exist/; source venv-exist/bin/activate; bash -l -c 'python3 scripts/insert2db/reputation/insert2db.py'
 */03 * * * * cd /opt/exist/; source venv-exist/bin/activate; bash -l -c 'python3 scripts/insert2db/twitter/insert2db.py'
 */40 * * * * cd /opt/exist/; source venv-exist/bin/activate; bash -l -c 'python3 scripts/insert2db/exploit/insert2db.py'
