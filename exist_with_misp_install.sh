@@ -147,6 +147,7 @@ sed -i -e "s/{{ tw.datetime }}/\<a href=\"https:\/\/twitter.com\/{{ tw.screen_na
 yum install wkhtmltopdf xorg-x11-server-Xvfb -y
 cp scripts/url/url.conf.template scripts/url/url.conf
 sed -i -e "s/path\/to\/your\/exist/opt\/exist/g" scripts/url/url.conf
+sed -i -e "s/YOUR_DB_USER/exist/g" -e "s/YOUR_DB_PASSWORD/${DBPASSWORD_EXIST}/g" -e "s/YOUR_DB/intelligence_db/g" scripts/url/url.conf
 
 ## EXIST Service
 cat <<EOL >> /etc/systemd/system/exist.service
