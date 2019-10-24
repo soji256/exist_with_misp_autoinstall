@@ -1,7 +1,7 @@
 # EXIST with MISP Auto-Installer
 
 このスクリプトは「サイバー脅威情報集約システム EXIST」と MISP を自動インストールするためのスクリプトです。  
-構築用スクリプトと各種APIとの連携設定用スクリプトの2種類のスクリプトで構成されています。  
+構築用スクリプトと各種APIとの連携設定用スクリプトという2つのスクリプトで構成されています。  
 なお、MISP のインストールには [misp-install-centos -7](https://github.com/vodkappa/misp-install-centos-7) を利用しています。
 
 ## 必要環境
@@ -25,7 +25,7 @@ chmod 755 exist_with_misp_install.sh
 ```
 wget https://raw.githubusercontent.com/soji256/exist_with_misp_autoinstall/master/exist_with_misp_configuration.sh
 
-# 各種 API key についてスクリプトに所定の欄に記載してから実行してください。
+# 各種 API key をスクリプトの所定の欄に記載してから実行してください。
 vim exist_with_misp_configuration.sh
 
 chmod 755 exist_with_misp_configuration.sh
