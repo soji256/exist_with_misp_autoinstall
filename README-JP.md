@@ -25,7 +25,7 @@ chmod 755 exist_with_misp_install.sh
 ```
 wget https://raw.githubusercontent.com/soji256/exist_with_misp_autoinstall/master/exist_with_misp_configuration.sh
 
-# 各種 API key をスクリプトの所定の欄に記載してから実行してください。
+# DB Admin のパスワードと各種 API key をスクリプトの所定の欄に記載してから実行してください。
 vim exist_with_misp_configuration.sh
 
 chmod 755 exist_with_misp_configuration.sh
