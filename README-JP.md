@@ -57,5 +57,7 @@ https://github.com/MISP/MISP
 - 2019/10/23 新規作成 "exist_with_misp_install.sh"
 - 2019/10/24 新規作成 "exist_with_misp_configuration.sh"
 
+## 予定
+- 連携設定用スクリプトにある MISP との連携設定部分は構築用スクリプト側に統合する予定です。
 
 著者: soji256 (Twitter [@soji256](https://twitter.com/soji256))
