@@ -50,3 +50,10 @@ https://github.com/MISP/MISP
 
 ![MISP](https://github.com/soji256/exist_with_misp_autoinstall/blob/master/img/misp.png "MISP")
 
+
+# Update History 
+- 2019/10/23 New "exist_with_misp_install.sh"
+- 2019/10/24 New "exist_with_misp_configuration.sh"
+
+
+Author: soji256 (Twitter @soji256)
