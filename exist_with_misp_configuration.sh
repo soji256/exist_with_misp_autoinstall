@@ -99,6 +99,8 @@ LANG=ja_JP.UTF-8
 */03 * * * * cd /opt/exist/; source venv-exist/bin/activate; bash -l -c 'python3 scripts/insert2db/twitter/insert2db.py'
 */40 * * * * cd /opt/exist/; source venv-exist/bin/activate; bash -l -c 'python3 scripts/insert2db/exploit/insert2db.py'
 00 05 * * * cd /opt/exist/; source venv-exist/bin/activate; bash -l -c 'python3 scripts/insert2db/threat/insert2db.py'
+00 05 * * * cd /opt/exist/; bash -l -c 'scripts/url/delete_webdata.sh'
+00 05 * * * cd /opt/exist/; bash -l -c 'scripts/url/delete_oldtaskresult.sh'
 EOL
 crontab -u root ${tmp_cronfile}
 rm -f ${tmp_cronfile}
