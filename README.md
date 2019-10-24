@@ -24,7 +24,7 @@ Configuration:
 ```
 wget https://raw.githubusercontent.com/soji256/exist_with_misp_autoinstall/master/exist_with_misp_configuration.sh
 
-# Set Your API keys
+# Set Your API keys & DB Admin Password
 vim exist_with_misp_configuration.sh
 
 chmod 755 exist_with_misp_configuration.sh
