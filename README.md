@@ -4,6 +4,7 @@ This script automatically installs the cyber threat information aggregation and 
 This tool uses [misp-install-centos -7](https://github.com/vodkappa/misp-install-centos-7) to install MISP.
 
 ## System Requirements
+Fresh installed CentOS 7 is assumed.
 
 - CentOS Linux release 7.7.1908 (Core)
 
@@ -51,9 +52,9 @@ https://github.com/MISP/MISP
 ![MISP](https://github.com/soji256/exist_with_misp_autoinstall/blob/master/img/misp.png "MISP")
 
 
-# Update History 
+## Update History 
 - 2019/10/23 New "exist_with_misp_install.sh"
 - 2019/10/24 New "exist_with_misp_configuration.sh"
 
 
-Author: soji256 (Twitter @soji256)
+Author: soji256 (Twitter [@soji256](https://twitter.com/soji256))
