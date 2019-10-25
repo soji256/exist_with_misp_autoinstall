@@ -55,6 +55,7 @@ https://github.com/MISP/MISP
 ## Update History 
 - 2019/10/23 New "exist_with_misp_install.sh"
 - 2019/10/24 New "exist_with_misp_configuration.sh"
+- 2019/10/25 New v0.1.0 release.
 
 ## Todo
 - I will integrate the MISP setting part of the configuration script into the install script.
