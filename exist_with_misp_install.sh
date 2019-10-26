@@ -26,7 +26,8 @@ sed -i -e "s/mysql_secure_installation/yum install expect -y\nexpect -c \"\nset 
 
 source misp.variables.sh
 
-echo include_only=.jp >> /etc/yum/pluginconf.d/fastestmirror.conf
+# if you live in Japan
+#echo include_only=.jp >> /etc/yum/pluginconf.d/fastestmirror.conf
 
 bash misp.install.sh
 
