@@ -31,6 +31,8 @@ source misp.variables.sh
 
 bash misp.install.sh
 
+# for logrotate by not root user
+sed -i -e "s/}/    su apache apache\n}/g" /etc/logrotate.d/misp
 
 ################################################################
 #
