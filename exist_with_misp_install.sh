@@ -144,6 +144,7 @@ firewall-cmd --reload
 ## Add Tweet Link
 sed -i -e "s/{{ tw.datetime }}/\<a href=\"https:\/\/twitter.com\/{{ tw.screen_name }}\/status\/{{ tw.id }}\"\>{{ tw.datetime }}\<\/a\>/g" apps/twitter/templates/twitter/index.html
 sed -i -e "s/{{ tw.datetime }}/\<a href=\"https:\/\/twitter.com\/{{ tw.screen_name }}\/status\/{{ tw.id }}\"\>{{ tw.datetime }}\<\/a\>/g" apps/dashboard/templates/dashboard/index.html
+sed -i -e "s/{{ tw.datetime }}/\<a href=\"https:\/\/twitter.com\/{{ tw.screen_name }}\/status\/{{ tw.id }}\"\>{{ tw.datetime }}\<\/a\>/g" apps/dashboard/templates/dashboard/crosslist.html
 sed -i -e "s/{{ tw.datetime }}/\<a href=\"https:\/\/twitter.com\/{{ tw.screen_name }}\/status\/{{ tw.id }}\"\>{{ tw.datetime }}\<\/a\>/g" apps/twitter_hunter/templates/twitter_hunter/tweets.html
 
 # Web Site Screenshot
