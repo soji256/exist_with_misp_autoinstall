@@ -101,6 +101,7 @@ LANG=ja_JP.UTF-8
 00 05 * * * cd /opt/exist/; source venv-exist/bin/activate; bash -l -c 'python3 scripts/insert2db/threat/insert2db.py'
 00 05 * * * cd /opt/exist/; bash -l -c 'scripts/url/delete_webdata.sh'
 00 05 * * * cd /opt/exist/; bash -l -c 'scripts/url/delete_oldtaskresult.sh'
+0 */2 * * * curl --header "Authorization: ${MISP_AUTHKEY}" --header "Accept: application/json" --header "Content-Type: application/json" http://localhost//feeds/fetchFromAllFeeds
 EOL
 crontab -u root ${tmp_cronfile}
 rm -f ${tmp_cronfile}
