@@ -59,7 +59,8 @@ curl --header "Authorization: ${MISP_AUTHKEY}" --header "Accept: application/jso
 curl --header "Authorization: ${MISP_AUTHKEY}" --header "Accept: application/json" --header "Content-Type: application/json" http://localhost//feeds/fetchFromFeed/1
 curl --header "Authorization: ${MISP_AUTHKEY}" --header "Accept: application/json" --header "Content-Type: application/json" http://localhost/feeds/enable/2
 curl --header "Authorization: ${MISP_AUTHKEY}" --header "Accept: application/json" --header "Content-Type: application/json" http://localhost//feeds/fetchFromFeed/2
-
+curl --header "Authorization: ${MISP_AUTHKEY}" --header "Accept: application/json" --header "Content-Type: application/json" http://localhost/feeds/enable/66
+curl --header "Authorization: ${MISP_AUTHKEY}" --header "Accept: application/json" --header "Content-Type: application/json" http://localhost//feeds/fetchFromFeed/66
 
 ################################################################
 #
@@ -134,4 +135,8 @@ gzip -d GeoLite2-City.mmdb.gz
 cp conf/geoip.conf.template conf/geoip.conf
 sed -i -e "s/path\/to\/your/opt\/exist/g" conf/geoip.conf
 
+# misp feed url has moved.
+echo "#####"
+echo "Please, the url of MISP feed No.2 modify to 'https://www.botvrij.eu/data/feed-osint/manifest.json'."
+echo "#####"
 
