@@ -137,6 +137,6 @@ sed -i -e "s/path\/to\/your/opt\/exist/g" conf/geoip.conf
 
 # misp feed url has moved.
 echo "#####"
-echo "Please, the url of MISP feed No.2 modify to 'https://www.botvrij.eu/data/feed-osint/manifest.json'."
+echo "Please, the url of MISP feed No.2 modify to 'https://www.botvrij.eu/data/feed-osint'."
 echo "#####"
 
