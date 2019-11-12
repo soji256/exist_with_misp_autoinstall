@@ -63,7 +63,7 @@ cd /opt/exist
 pip install -r requirements.txt
 
 cp intelligence/settings.py.template intelligence/settings.py
-sed -i -e "s/ALLOWED_HOSTS = \[/ALLOWED_HOSTS = \[\n     'localhost',\n     '$(ip -4 a show ens33 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')',/g" intelligence/settings.py
+sed -i -e "s/ALLOWED_HOSTS = \[/ALLOWED_HOSTS = \[\n     'localhost',\n     '$(ip route get 8.8.8.8 | sed -n 's|^.*src \(.*\)$|\1|gp')',/g" intelligence/settings.py
 sed -i -e "s/YOUR_DB_USER/exist/g" intelligence/settings.py
 sed -i -e "s/YOUR_DB_PASSWORD/${DBPASSWORD_EXIST}/g" intelligence/settings.py
 sed -i -e "s/'HOST': ''/'HOST': 'localhost'/g" intelligence/settings.py
