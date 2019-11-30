@@ -110,7 +110,7 @@ sed -i -e "/\[abuse\]/,/api_key = YOUR_API_KEY/c[abuse]\napi_key = ${ABUSE_API_K
 # Twitter API（Consumer API keys, Access token）
 sed -i -e "s/YOUR_CK/${TWITTER_CK}/" -e "s/YOUR_CS/${TWITTER_CS}/" -e "s/YOUR_AT/${TWITTER_AT}/" -e "s/YOUR_AS/${TWITTER_AS}/" scripts/insert2db/conf/insert2db.conf
 # inoreader API
-sed -i "/\[inoreader\]/,/Passwd = YOUR_PASSWD/c[inoreader]\nAppID = ${inoreader_AppID}\nAppKey = ${inoreader_AppKey}\nEmail = ${inoreader_Email}\nPasswd = ${inoreader_Passwd}" scripts/insert2db/conf/insert2db.conf
+sed -i -e "/\[inoreader\]/,/Passwd = YOUR_PASSWD/c[inoreader]\nAppID = ${inoreader_AppID}\nAppKey = ${inoreader_AppKey}\nEmail = ${inoreader_Email}\nPasswd = ${inoreader_Passwd}" scripts/insert2db/conf/insert2db.conf
 
 # Cron
 tmp_cronfile=$(mktemp)
