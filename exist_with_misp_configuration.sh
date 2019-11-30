@@ -109,6 +109,8 @@ sed -i -e "/\[malshare\]/,/api_key = YOUR_API_KEY/c[malshare]\napi_key = ${MALSH
 sed -i -e "/\[abuse\]/,/api_key = YOUR_API_KEY/c[abuse]\napi_key = ${ABUSE_API_KEY}" scripts/insert2db/conf/insert2db.conf
 # Twitter API（Consumer API keys, Access token）
 sed -i -e "s/YOUR_CK/${TWITTER_CK}/" -e "s/YOUR_CS/${TWITTER_CS}/" -e "s/YOUR_AT/${TWITTER_AT}/" -e "s/YOUR_AS/${TWITTER_AS}/" scripts/insert2db/conf/insert2db.conf
+# inoreader API
+sed -i "/\[inoreader\]/,/Passwd = YOUR_PASSWD/c[inoreader]\nAppID = ${inoreader_AppID}\nAppKey = ${inoreader_AppKey}\nEmail = ${inoreader_Email}\nPasswd = ${inoreader_Passwd}" scripts/insert2db/conf/insert2db.conf
 
 # Cron
 tmp_cronfile=$(mktemp)
@@ -144,11 +146,11 @@ sed -i -e "s/path\/to\/your\/exist/opt\/exist/" scripts/hunter/conf/hunter.conf
 sed -i -e  "s/randint(0,18)/randint(0,4)/g" scripts/hunter/twitter/tw_hunter.py
 
 # Twitter API for Hunters
-sed -i "/\[auth-hunter00\]/,/AS = YOUR_AS/c\\[auth-hunter00\]\nCK = ${CK0}\nCS = ${CS0}\nAT = ${AT0}\nAS = ${AS0}" scripts/hunter/conf/hunter.conf
-sed -i "/\[auth-hunter01\]/,/AS = YOUR_AS/c\\[auth-hunter01\]\nCK = ${CK1}\nCS = ${CS1}\nAT = ${AT1}\nAS = ${AS1}" scripts/hunter/conf/hunter.conf
-sed -i "/\[auth-hunter02\]/,/AS = YOUR_AS/c\\[auth-hunter02\]\nCK = ${CK2}\nCS = ${CS2}\nAT = ${AT2}\nAS = ${AS2}" scripts/hunter/conf/hunter.conf
-sed -i "/\[auth-hunter03\]/,/AS = YOUR_AS/c\\[auth-hunter03\]\nCK = ${CK3}\nCS = ${CS3}\nAT = ${AT3}\nAS = ${AS3}" scripts/hunter/conf/hunter.conf
-sed -i "/\[auth-hunter04\]/,/AS = YOUR_AS/c\\[auth-hunter04\]\nCK = ${CK4}\nCS = ${CS4}\nAT = ${AT4}\nAS = ${AS4}" scripts/hunter/conf/hunter.conf
+sed -i "/\[auth-hunter00\]/,/AS = YOUR_AS/c[auth-hunter00]\nCK = ${CK0}\nCS = ${CS0}\nAT = ${AT0}\nAS = ${AS0}" scripts/hunter/conf/hunter.conf
+sed -i "/\[auth-hunter01\]/,/AS = YOUR_AS/c[auth-hunter01]\nCK = ${CK1}\nCS = ${CS1}\nAT = ${AT1}\nAS = ${AS1}" scripts/hunter/conf/hunter.conf
+sed -i "/\[auth-hunter02\]/,/AS = YOUR_AS/c[auth-hunter02]\nCK = ${CK2}\nCS = ${CS2}\nAT = ${AT2}\nAS = ${AS2}" scripts/hunter/conf/hunter.conf
+sed -i "/\[auth-hunter03\]/,/AS = YOUR_AS/c[auth-hunter03]\nCK = ${CK3}\nCS = ${CS3}\nAT = ${AT3}\nAS = ${AS3}" scripts/hunter/conf/hunter.conf
+sed -i "/\[auth-hunter04\]/,/AS = YOUR_AS/c[auth-hunter04]\nCK = ${CK4}\nCS = ${CS4}\nAT = ${AT4}\nAS = ${AS4}" scripts/hunter/conf/hunter.conf
 
 ####################################
 ### exist.conf
