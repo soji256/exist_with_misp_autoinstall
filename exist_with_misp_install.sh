@@ -9,6 +9,9 @@
 wget https://raw.githubusercontent.com/vodkappa/misp-install-centos-7/master/misp.install.sh
 wget https://raw.githubusercontent.com/vodkappa/misp-install-centos-7/master/misp.variables.sh
 
+# hostnamectl comment out
+sed -i -e "s/hostnamectl/#hostnamectl/" misp.install.sh
+
 # Modify the php version （rh-php56 -> rh-php72)
 sed -i -e "s/rh-php56/rh-php72/g" misp.variables.sh
 sed -i -e "s/rh-php56/rh-php72/g" misp.install.sh
@@ -63,14 +66,18 @@ cd /opt/exist
 pip install -r requirements.txt
 
 cp intelligence/settings.py.template intelligence/settings.py
-sed -i -e "s/ALLOWED_HOSTS = \[/ALLOWED_HOSTS = \[\n     'localhost',\n     '$(ip route get 8.8.8.8 | sed -n 's|^.*src \(.*\)$|\1|gp')',/g" intelligence/settings.py
+sed -i -e "s/ALLOWED_HOSTS = \[/ALLOWED_HOSTS = \[\n     'localhost',\n     '$(ip route get 8.8.8.8 | sed -n 's|^.*src \(.*\) $|\1|gp')',/g" intelligence/settings.py
 sed -i -e "s/YOUR_DB_USER/exist/g" intelligence/settings.py
 sed -i -e "s/YOUR_DB_PASSWORD/${DBPASSWORD_EXIST}/g" intelligence/settings.py
 sed -i -e "s/'HOST': ''/'HOST': 'localhost'/g" intelligence/settings.py
 sed -i -e "s/\"SET CHARACTER SET utf8mb4;\"/\"SET CHARACTER SET utf8mb4;\"\n                            \"SET sql_mode='STRICT_TRANS_TABLES';\"/g" intelligence/settings.py
 
-python3 manage.py makemigrations exploit reputation threat threat_hunter twitter twitter_hunter
+python3 manage.py makemigrations exploit reputation threat threat_hunter twitter twitter_hunter news news_hunter vuln
 python3 manage.py migrate
+
+yum install redis
+systemctl start redis
+systemctl enable redis
 
 ## Make celery config
 cat <<EOL >> /etc/sysconfig/celery

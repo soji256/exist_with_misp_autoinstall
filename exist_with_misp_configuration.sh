@@ -5,17 +5,41 @@
 # API Keys
 #
 ################################################################
+#[DB]
 DBUSER_ADMIN=root
 DBPASSWORD_ADMIN=xxxxxxxxxxxxxxxxxxx
 
+#[malshare]
 MALSHARE_API_KEY=xxxxxxxxxxxxxxxxxxx
 
+#[twitter]
+# CK = Consumer API keys
+# CS = Consumer API secret key
+# AT = Access token 
+# AS = Access token secret
 TWITTER_CK=xxxxxxxxxxxxxxxxxxx
 TWITTER_CS=xxxxxxxxxxxxxxxxxxx
 TWITTER_AT=xxxxxxxxxxxxxxxxxxx
 TWITTER_AS=xxxxxxxxxxxxxxxxxxx
 
+#[vt]
 VT_APIKEY=xxxxxxxxxxxxxxxxxxx
+
+#[AbuseIPDB]
+ABUSE_API_KEY=xxxxxxxxxxxxxxxxxxx
+
+#[inoreader]
+inoreader_AppID=xxxxxxxxxxxxxxxxxxx
+inoreader_AppKey=xxxxxxxxxxxxxxxxxxx
+inoreader_Email=xxxxxxxxxxxxxxxxxxx
+inoreader_Passwd=xxxxxxxxxxxxxxxxxxx
+
+#[shodan]
+shodan_API_KEY=xxxxxxxxxxxxxxxxxxx
+
+#[censys]
+censys_API_ID=xxxxxxxxxxxxxxxxxxx
+censys_SECRET=xxxxxxxxxxxxxxxxxxx
 
 #[auth-hunter00]
 CK0=xxxxxxxxxxxxxxxxxxx
@@ -69,23 +93,22 @@ curl --header "Authorization: ${MISP_AUTHKEY}" --header "Accept: application/jso
 ################################################################
 
 cd /opt/exist/
+
+########################
+### insert2db
+########################
 cp scripts/insert2db/conf/insert2db.conf.template scripts/insert2db/conf/insert2db.conf
-
 # Set EXIST Path
-sed -i -e "s/path\/to\/your\/exist/opt\/exist/g" scripts/insert2db/conf/insert2db.conf
-
-# MISP API （Authkey）
-sed -i -e "s/YOUR_MISP_URL/localhost\//g" -e "s/YOUR_MISP_API_KEY/${MISP_AUTHKEY}/g" scripts/insert2db/conf/insert2db.conf
-
+sed -i -e "s/path\/to\/your\/exist/opt\/exist/" scripts/insert2db/conf/insert2db.conf
+# MISP API （URL/Authkey）
+sed -i -e "s/YOUR_MISP_URL/localhost\//" scripts/insert2db/conf/insert2db.conf
+sed -i -e "s/YOUR_MISP_API_KEY/${MISP_AUTHKEY}/" scripts/insert2db/conf/insert2db.conf
 # Malshare API（API Key）
-sed -i -e "s/YOUR_API_KEY/${MALSHARE_API_KEY}/g"  scripts/insert2db/conf/insert2db.conf
-
+sed -i -e "/\[malshare\]/,/api_key = YOUR_API_KEY/c[malshare]\napi_key = ${MALSHARE_API_KEY}" scripts/insert2db/conf/insert2db.conf
+# AbuseIPDB API（API Key）
+sed -i -e "/\[abuse\]/,/api_key = YOUR_API_KEY/c[abuse]\napi_key = ${ABUSE_API_KEY}" scripts/insert2db/conf/insert2db.conf
 # Twitter API（Consumer API keys, Access token）
-# CK = Consumer API keys
-# CS = Consumer API secret key
-# AT = Access token 
-# AS = Access token secret
-sed -i -e "s/YOUR_CK/${TWITTER_CK}/g" -e "s/YOUR_CS/${TWITTER_CS}/g" -e "s/YOUR_AT/${TWITTER_AT}/g" -e "s/YOUR_AS/${TWITTER_AS}/g"  scripts/insert2db/conf/insert2db.conf
+sed -i -e "s/YOUR_CK/${TWITTER_CK}/" -e "s/YOUR_CS/${TWITTER_CS}/" -e "s/YOUR_AT/${TWITTER_AT}/" -e "s/YOUR_AS/${TWITTER_AS}/" scripts/insert2db/conf/insert2db.conf
 
 # Cron
 tmp_cronfile=$(mktemp)
@@ -94,10 +117,13 @@ MAILTO = ''
 LANG=ja_JP.UTF-8
 
 # EXIST
-*/1 * * * * cd /opt/exist/; source venv-exist/bin/activate; bash -l -c 'python3 scripts/hunter/twitter/tw_watchhunter.py'
-*/1 * * * * cd /opt/exist/; source venv-exist/bin/activate; bash -l -c 'python3 scripts/hunter/threat/th_watchhunter.py'
+*/2 * * * * cd /opt/exist/; source venv-exist/bin/activate; bash -l -c 'python3 scripts/hunter/twitter/tw_watchhunter.py'
+*/5 * * * * cd /opt/exist/; source venv-exist/bin/activate; bash -l -c 'python3 scripts/hunter/threat/th_watchhunter.py'
+
+*/3 * * * * cd /opt/exist/; source venv-exist/bin/activate; bash -l -c 'python3 scripts/insert2db/twitter/insert2db.py'
+*/3 * * * * cd /opt/exist/; source venv-exist/bin/activate; bash -l -c 'python3 scripts/insert2db/news/insert2db.py'
+*/3 * * * * cd /opt/exist/; source venv-exist/bin/activate; bash -l -c 'python3 scripts/insert2db/vuln/insert2db.py'
 */20 * * * * cd /opt/exist/; source venv-exist/bin/activate; bash -l -c 'python3 scripts/insert2db/reputation/insert2db.py'
-*/03 * * * * cd /opt/exist/; source venv-exist/bin/activate; bash -l -c 'python3 scripts/insert2db/twitter/insert2db.py'
 */40 * * * * cd /opt/exist/; source venv-exist/bin/activate; bash -l -c 'python3 scripts/insert2db/exploit/insert2db.py'
 00 05 * * * cd /opt/exist/; source venv-exist/bin/activate; bash -l -c 'python3 scripts/insert2db/threat/insert2db.py'
 00 05 * * * cd /opt/exist/; bash -l -c 'scripts/url/delete_webdata.sh'
@@ -112,7 +138,7 @@ cd /opt/exist/
 cp scripts/hunter/conf/hunter.conf.template scripts/hunter/conf/hunter.conf
 
 # Set EXIST Path
-sed -i -e "s/path\/to\/your\/exist/opt\/exist/g" scripts/hunter/conf/hunter.conf
+sed -i -e "s/path\/to\/your\/exist/opt\/exist/" scripts/hunter/conf/hunter.conf
 
 # Change Number of Twitter Hunters (19 -> 5)
 sed -i -e  "s/randint(0,18)/randint(0,4)/g" scripts/hunter/twitter/tw_hunter.py
@@ -124,19 +150,21 @@ sed -i "/\[auth-hunter02\]/,/AS = YOUR_AS/c\\[auth-hunter02\]\nCK = ${CK2}\nCS =
 sed -i "/\[auth-hunter03\]/,/AS = YOUR_AS/c\\[auth-hunter03\]\nCK = ${CK3}\nCS = ${CS3}\nAT = ${AT3}\nAS = ${AS3}" scripts/hunter/conf/hunter.conf
 sed -i "/\[auth-hunter04\]/,/AS = YOUR_AS/c\\[auth-hunter04\]\nCK = ${CK4}\nCS = ${CS4}\nAT = ${AT4}\nAS = ${AS4}" scripts/hunter/conf/hunter.conf
 
+####################################
+### exist.conf
+####################################
+cp conf/exist.conf.template conf/exist.conf
 # VirusTotal
-cp conf/vt.conf.template conf/vt.conf
-sed -i -e  "s/YOUR_KEY/${VT_APIKEY}/g" conf/vt.conf
-
+sed -i -e  "s/YOUR_KEY/${VT_APIKEY}/" conf/exist.conf
 # geoip
 cd /opt/exist/
 wget http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.mmdb.gz
 gzip -d GeoLite2-City.mmdb.gz
-cp conf/geoip.conf.template conf/geoip.conf
-sed -i -e "s/path\/to\/your/opt\/exist/g" conf/geoip.conf
-
-# misp feed url has moved.
-echo "#####"
-echo "Please, the url of MISP feed No.2 modify to 'https://www.botvrij.eu/data/feed-osint'."
-echo "#####"
+sed -i -e "s/path\/to\/your\/GeoLite2-City.mmdb/opt\/exist\/GeoLite2-City.mmdb/" conf/exist.conf
+# shodan
+sed -i -e "/\[shodan\]/,/apikey = YOUR_API_KEY/c[shodan]\nbaseURL = https://api.shodan.io/shodan/host/\napikey = ${shodan_API_KEY}" conf/exist.conf
+# censys
+sed -i -e "/\[censys\]/,/secret = YOUR_SECRET/c[censys]\nbaseURL = https://censys.io/api/v1/\napi_id = ${censys_API_ID}\nsecret = ${censys_SECRET}" conf/exist.conf
+# abuse
+sed -i -e "/\[abuse\]/,/apikey = YOUR_API_KEY/c[abuse]\nbaseURL = https://api.abuseipdb.com/api/v2/check\napikey = ${ABUSE_API_KEY}\nsecret = ${censys_SECRET}" conf/exist.conf
 
