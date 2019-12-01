@@ -62,7 +62,7 @@ https://github.com/MISP/MISP
   - [修正] cron の設定が不足しているために Twitter Hunter および Threat Hunter が稼働しない
   - [変更] タイムゾーンを Asia/Tokyo に変更する処理についてはオプション扱いとしコメントアウトしました。
 - 2019/12/01 v0.2.0 をリリースしました。
-  - [新規] EXIST のアップデートに合わせて news と vuln の設定を追加
+  - [新規] EXIST のアップデートに合わせて news と vuln の設定を追加しました。
 
 
 ## 予定
