@@ -161,7 +161,7 @@ sed -i -e "s/path\/to\/your\/exist/opt\/exist/g" scripts/url/url.conf
 sed -i -e "s/YOUR_DB_USER/exist/g" -e "s/YOUR_DB_PASSWORD/${DBPASSWORD_EXIST}/g" -e "s/YOUR_DB/intelligence_db/g" scripts/url/url.conf
 
 # Japanese Font
-yum install ipa-gothic-fonts ipa-pgothic-fonts
+yum install ipa-gothic-fonts ipa-pgothic-fonts -y
 fc-cache -f
 
 ## EXIST Service
