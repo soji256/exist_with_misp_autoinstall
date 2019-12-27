@@ -168,5 +168,5 @@ sed -i -e "/\[shodan\]/,/apikey = YOUR_API_KEY/c[shodan]\nbaseURL = https://api.
 # censys
 sed -i -e "/\[censys\]/,/secret = YOUR_SECRET/c[censys]\nbaseURL = https://censys.io/api/v1/\napi_id = ${censys_API_ID}\nsecret = ${censys_SECRET}" conf/exist.conf
 # abuse
-sed -i -e "/\[abuse\]/,/apikey = YOUR_API_KEY/c[abuse]\nbaseURL = https://api.abuseipdb.com/api/v2/check\napikey = ${ABUSE_API_KEY}\nsecret = ${censys_SECRET}" conf/exist.conf
+sed -i -e "/\[abuse\]/,/apikey = YOUR_API_KEY/c[abuse]\nbaseURL = https://api.abuseipdb.com/api/v2/check\napikey = ${ABUSE_API_KEY}" conf/exist.conf
 
